@@ -81,6 +81,7 @@ CKEDITOR.plugins.add( 'simage', {
 						return function(data, textStatus, jqXHR) {
 							CKEDITOR.instances[curr.name].setReadOnly(false)
                             editor.showNotification("Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin.", "warning")
+                            loaderElem.remove()
 						}
 					}(this)))
 

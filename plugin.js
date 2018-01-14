@@ -16,7 +16,7 @@ CKEDITOR.plugins.add( 'simage', {
 						b = document.createElement('div')
 						b.className = 'message alert alert-danger'
 						m = document.createElement('span')
-						m.innerHTML = "Image size exceeded! Please upload image of less than 5 MB."
+						m.innerHTML = "Dosya boyutu izin verilen sınırı aşıyor. Lütfen en fazla 5 MB büyüklüğünde bir dosya seçin."
 						b.appendChild(m)
 						c = document.createElement('span')
 						c.className = 'close'
@@ -38,7 +38,7 @@ CKEDITOR.plugins.add( 'simage', {
 						b = document.createElement('div')
 						b.className = 'message alert alert-danger'
 						m = document.createElement('span')
-						m.innerHTML = "The uploaded image format is not of acceptible format! Please upload an image!"
+						m.innerHTML = "Seçmiş olduğunuz dosya bir resim dosyası değildir."
 						b.appendChild(m)
 						c = document.createElement('span')
 						c.className = 'close'
@@ -66,7 +66,7 @@ CKEDITOR.plugins.add( 'simage', {
 					formData = new FormData;
 					formData.append('file', file);
 					loaderElem = new CKEDITOR.dom.element('loader-elem')
-					loaderHtmlStr = '<div style="position: relative; z-index: 100;width: 100%;height: 100%;text-align: center;background: white;opacity: 0.75;pointer-events:none">' + '<div style="width: 100%;height: 30px;margin-top: 100px;">Please wait while image is uploading...</div>' + '</div>'
+					loaderHtmlStr = '<div style="position: relative; z-index: 100;width: 100%;height: 100%;text-align: center;background: white;opacity: 0.75;pointer-events:none">' + '<div style="width: 100%;height: 30px;margin-top: 100px;">Resim gönderiliyor...</div>' + '</div>'
 					loaderDomEle = CKEDITOR.dom.element.createFromHtml(loaderHtmlStr)
 					loaderElem.append(loaderDomEle)
 					editor.insertElement(loaderElem)
@@ -112,14 +112,14 @@ CKEDITOR.plugins.add( 'simage', {
 								loaderElem.remove()
 								$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 							}
-						} 
+						}
 					}(this))).error((function(_this){
 						return function(data, textStatus, jqXHR) {
 							CKEDITOR.instances[curr.name].setReadOnly(false)
 							b = document.createElement('div')
 							b.className = 'message alert alert-danger'
 							m = document.createElement('span')
-							m.innerHTML = "Image upload failed! Please try again!"
+							m.innerHTML = "Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin."
 							b.appendChild(m)
 							c = document.createElement('span')
 							c.className = 'close'
@@ -146,7 +146,7 @@ CKEDITOR.plugins.add( 'simage', {
 		});
 
 		editor.ui.addButton( 'SImage', {
-			label: 'Custom Image Uploader',
+			label: 'Resim ekle',
 			command: 'simage',
 			toolbar: 'insert'
 		});

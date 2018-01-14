@@ -45,7 +45,7 @@ CKEDITOR.plugins.add( 'simage', {
 						return function(data, textStatus, jqXHR) {
 							var isNew;
 
-							if (jqXHR.status == 200) {
+							if (jqXHR.status == 200 && data.success !== false) {
 								url = editor.config.dataParser(data)
 								elem = new CKEDITOR.dom.element( 'elem' )
 								maxWidth = Math.min(inputWidth, 600)

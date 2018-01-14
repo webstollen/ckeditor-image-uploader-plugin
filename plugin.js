@@ -46,7 +46,6 @@ CKEDITOR.plugins.add( 'simage', {
 							var isNew;
 
 							if (jqXHR.status == 200) {
-								CKEDITOR.instances[curr.name].setReadOnly(false)
 								url = editor.config.dataParser(data)
 								elem = new CKEDITOR.dom.element( 'elem' )
 								maxWidth = Math.min(inputWidth, 600)
@@ -73,9 +72,11 @@ CKEDITOR.plugins.add( 'simage', {
 								editor.insertElement(newLine)
 								editor.insertElement(elem)
 								editor.insertElement(newLine)
-								loaderElem.remove()
-								$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 							}
+
+							CKEDITOR.instances[curr.name].setReadOnly(false)
+				            loaderElem.remove()
+				            $(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						}
 					}(this))).error((function(_this){
 						return function(data, textStatus, jqXHR) {

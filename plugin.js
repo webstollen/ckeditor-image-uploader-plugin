@@ -1,8 +1,8 @@
 CKEDITOR.plugins.add('simage', {
     icons: 'simage',
-    allowedContent: 'img[alt,!src,width,height,data-width,data-height]{border-style,border-width,float,height,margin‌​,margin-bottom,margi‌​n-left,margin-right,‌​margin-top,width}',
     init: function (editor) {
         editor.addCommand('simage', {
+			allowedContent: 'img[alt,!src,width,height,data-width,data-height,data-cke-saved-src]{border-style,border-width,float,height,margin‌​,margin-bottom,margi‌​n-left,margin-right,‌​margin-top,width}',
             exec: function () {
                 var fileInput = document.createElement('input');
 

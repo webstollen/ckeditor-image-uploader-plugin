@@ -13,47 +13,11 @@ CKEDITOR.plugins.add( 'simage', {
 					$(CKEDITOR.currentInstance).trigger('enableFormSubmit')
 					curr = CKEDITOR.currentInstance
 					if (file.size > 5000000){
-						b = document.createElement('div')
-						b.className = 'message alert alert-danger'
-						m = document.createElement('span')
-						m.innerHTML = "Dosya boyutu izin verilen sınırı aşıyor. Lütfen en fazla 5 MB büyüklüğünde bir dosya seçin."
-						b.appendChild(m)
-						c = document.createElement('span')
-						c.className = 'close'
-						c.innerHTML = 'X'
-						b.appendChild(c)
-						e = document.querySelector('.error-space')
-						e.appendChild(b)
-						setTimeout(function(){
-							alert = document.querySelector('.alert-danger')
-							alert.parentNode.removeChild(alert)
-						}, 20000)
-						c.onclick = function(){
-							b = document.querySelector('.alert-danger')
-							b.parentNode.removeChild(b)
-						}
+                        editor.showNotification("Dosya boyutu izin verilen sınırı aşıyor. Lütfen en fazla 5 MB büyüklüğünde bir dosya seçin.", "warning")
 						$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						return
 					}else if (['jpeg','jpg','png','svg','gif','tif', 'svg+xml'].indexOf(file.type.split('/')[1]) === -1){
-						b = document.createElement('div')
-						b.className = 'message alert alert-danger'
-						m = document.createElement('span')
-						m.innerHTML = "Seçmiş olduğunuz dosya bir resim dosyası değildir."
-						b.appendChild(m)
-						c = document.createElement('span')
-						c.className = 'close'
-						c.innerHTML = 'X'
-						b.appendChild(c)
-						e = document.querySelector('.error-space')
-						e.appendChild(b)
-						setTimeout(function(){
-							alert = document.querySelector('.alert-danger')
-							alert.parentNode.removeChild(alert)
-						}, 20000)
-						c.onclick = function(){
-							b = document.querySelector('.alert-danger')
-							b.parentNode.removeChild(b)
-						}
+                        editor.showNotification("Seçmiş olduğunuz dosya bir resim dosyası değildir.", "warning")
 						$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						return
 					}
@@ -116,27 +80,7 @@ CKEDITOR.plugins.add( 'simage', {
 					}(this))).error((function(_this){
 						return function(data, textStatus, jqXHR) {
 							CKEDITOR.instances[curr.name].setReadOnly(false)
-							b = document.createElement('div')
-							b.className = 'message alert alert-danger'
-							m = document.createElement('span')
-							m.innerHTML = "Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin."
-							b.appendChild(m)
-							c = document.createElement('span')
-							c.className = 'close'
-							c.innerHTML = 'X'
-							b.appendChild(c)
-							e = document.querySelector('.error-space')
-							e.appendChild(b)
-							loaderElem.remove()
-							$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
-							setTimeout(function(){
-								alert = document.querySelector('.alert-danger')
-								alert.parentNode.removeChild(alert)
-							}, 20000)
-							c.onclick = function(){
-								b = document.querySelector('.alert-danger')
-								b.parentNode.removeChild(b)
-							}
+                            editor.showNotification("Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin.", "warning")
 						}
 					}(this)))
 

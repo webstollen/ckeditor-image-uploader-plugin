@@ -12,9 +12,9 @@ CKEDITOR.plugins.add('simage', {
 
                 fileInput.onchange = function () {
                     var file = fileInput.files[0],
-						img, inputWidth, inputHeight, formData, loaderElem,
-						loaderHtmlStr, loaderDomEle, url, elem, maxWidth, maxHeight,
-						width, height, newLine, srcSet, imgElem, imgDomElem;
+						img, inputWidth, inputHeight, formData, loadMaskEl,
+						imgSrc, imgContainerEl, imgHtml, maxWidth, maxHeight,
+						width, height, srcSet;
 
                     if (file.size > 5000000) {
                         editor.showNotification('Dosya boyutu izin verilen sınırı aşıyor. Lütfen en fazla 5 MB büyüklüğünde bir dosya seçin.', 'warning');
@@ -37,16 +37,13 @@ CKEDITOR.plugins.add('simage', {
 
                     formData.append('file', file);
 
-                    loaderElem = new CKEDITOR.dom.element('loader-elem');
-		            loaderHtmlStr = (
-		               	'<div style="position:relative;z-index:100;width:100%;height:100%;text-align:center;background:white;opacity:0.75;pointer-events:none">' +
+					loadMaskEl = CKEDITOR.dom.element.createFromHtml(
+						'<div style="position:relative;z-index:100;width:100%;height:100%;text-align:center;background:white;opacity:0.75;pointer-events:none">' +
 		               	    '<div style="width:100%;height:30px;margin-top:100px;">Resim gönderiliyor...</div>' +
 		               	'</div>'
-		            );
-		            loaderDomEle = CKEDITOR.dom.element.createFromHtml(loaderHtmlStr);
+					);
 
-                    loaderElem.append(loaderDomEle);
-                    editor.insertElement(loaderElem);
+                    editor.insertElement(loadMaskEl);
                     editor.setReadOnly(true);
 
                     jQuery
@@ -59,11 +56,11 @@ CKEDITOR.plugins.add('simage', {
                         })
 						.success(function(data, textStatus, jqXHR) {
                             editor.setReadOnly(false);
-                            loaderElem.remove();
+                            loadMaskEl.remove();
 
                             if (jqXHR.status == 200 && data.success !== false) {
-                                url = editor.config.dataParser(data);
-                                elem = new CKEDITOR.dom.element('elem');
+                                imgSrc = editor.config.dataParser(data);
+                                imgContainerEl = new CKEDITOR.dom.element('p');
                                 maxWidth = Math.min(inputWidth, 600);
                                 maxHeight = Math.min(inputHeight, 600);
 
@@ -80,28 +77,22 @@ CKEDITOR.plugins.add('simage', {
                                     height = maxHeight;
                                 }
 
-                                newLine = CKEDITOR.dom.element.createFromHtml('<p><br></p>');
-
                                 if (editor.config.srcSet) {
                                     srcSet = editor.config.srcSet(data);
-                                    imgElem = '<img src="' + url + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
                                 }
 								else {
-                                    imgElem = '<img src="' + url + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
                                 }
 
-                                imgDomElem = CKEDITOR.dom.element.createFromHtml(imgElem);
-
-                                elem.append(imgDomElem);
-                                editor.insertElement(newLine);
-                                editor.insertElement(elem);
-                                editor.insertElement(newLine);
+                                imgContainerEl.append(CKEDITOR.dom.element.createFromHtml(imgHtml));
+                                editor.insertElement(imgContainerEl);
                             }
                         })
 						.error(function(data, textStatus, jqXHR) {
                             editor.setReadOnly(false);
                             editor.showNotification('Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin.', 'warning');
-                            loaderElem.remove();
+                            loadMaskEl.remove();
                         });
                 }
             }

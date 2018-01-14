@@ -83,6 +83,7 @@ CKEDITOR.plugins.add( 'simage', {
 							CKEDITOR.instances[curr.name].setReadOnly(false)
                             editor.showNotification("Resim gönderilirken bir hata oluştu. Lütfen birazdan yeniden deneyin.", "warning")
                             loaderElem.remove()
+				            $(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						}
 					}(this)))
 

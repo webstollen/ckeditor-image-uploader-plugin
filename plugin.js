@@ -24,14 +24,14 @@ CKEDITOR.plugins.add( 'simage', {
 						b.appendChild(c)
 						e = document.querySelector('.error-space')
 						e.appendChild(b)
-						setTimeout(function(){ 
+						setTimeout(function(){
 							alert = document.querySelector('.alert-danger')
 							alert.parentNode.removeChild(alert)
 						}, 20000)
 						c.onclick = function(){
 							b = document.querySelector('.alert-danger')
 							b.parentNode.removeChild(b)
-						} 
+						}
 						$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						return
 					}else if (['jpeg','jpg','png','svg','gif','tif', 'svg+xml'].indexOf(file.type.split('/')[1]) === -1){
@@ -46,14 +46,14 @@ CKEDITOR.plugins.add( 'simage', {
 						b.appendChild(c)
 						e = document.querySelector('.error-space')
 						e.appendChild(b)
-						setTimeout(function(){ 
+						setTimeout(function(){
 							alert = document.querySelector('.alert-danger')
 							alert.parentNode.removeChild(alert)
 						}, 20000)
 						c.onclick = function(){
 							b = document.querySelector('.alert-danger')
 							b.parentNode.removeChild(b)
-						} 
+						}
 						$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
 						return
 					}
@@ -83,7 +83,7 @@ CKEDITOR.plugins.add( 'simage', {
 							data = JSON.parse(data)
 							if (jqXHR.status == 200) {
 								CKEDITOR.instances[curr.name].setReadOnly(false)
-								url = editor.config.dataParser(data)	
+								url = editor.config.dataParser(data)
 								elem = new CKEDITOR.dom.element( 'elem' )
 								maxWidth = Math.min(inputWidth, 600)
 								maxHeight = Math.min(inputHeight, 600)
@@ -103,7 +103,7 @@ CKEDITOR.plugins.add( 'simage', {
 									imgElem = '<img src="' + url + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">'
 								} else{
 									imgElem = '<img src="' + url + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">'
-								}		
+								}
 								imgDomElem = CKEDITOR.dom.element.createFromHtml(imgElem)
 								elem.append(imgDomElem)
 								editor.insertElement(newLine)
@@ -129,14 +129,14 @@ CKEDITOR.plugins.add( 'simage', {
 							e.appendChild(b)
 							loaderElem.remove()
 							$(CKEDITOR.instances[curr.name]).trigger('enableFormSubmit')
-							setTimeout(function(){ 
+							setTimeout(function(){
 								alert = document.querySelector('.alert-danger')
 								alert.parentNode.removeChild(alert)
 							}, 20000)
 							c.onclick = function(){
 								b = document.querySelector('.alert-danger')
 								b.parentNode.removeChild(b)
-							} 
+							}
 						}
 					}(this)))
 

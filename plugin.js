@@ -2,7 +2,7 @@ CKEDITOR.plugins.add('simage', {
     icons: 'simage',
     init: function (editor) {
         editor.addCommand('simage', {
-			allowedContent: 'img[!src]',
+			allowedContent: 'img[!src,alt,width,height,class,data-width,data-height]',
             exec: function () {
                 var fileInput = document.createElement('input');
 

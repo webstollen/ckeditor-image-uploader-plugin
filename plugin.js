@@ -13,8 +13,7 @@ CKEDITOR.plugins.add('simage', {
                 fileInput.onchange = function () {
                     var file = fileInput.files[0],
 						img, inputWidth, inputHeight, formData, loadMaskEl,
-						imgSrc, imgContainerEl, imgHtml, maxWidth, maxHeight,
-						width, height, srcSet;
+						imgSrc, imgContainerEl, imgHtml, srcSet;
 
                     if (file.size > 5000000) {
                         editor.showNotification('Dosya boyutu izin verilen sınırı aşıyor. Lütfen en fazla 5 MB büyüklüğünde bir dosya seçin.', 'warning');
@@ -61,28 +60,13 @@ CKEDITOR.plugins.add('simage', {
                             if (jqXHR.status == 200 && data.success !== false) {
                                 imgSrc = editor.config.dataParser(data);
                                 imgContainerEl = new CKEDITOR.dom.element('p');
-                                maxWidth = Math.min(inputWidth, 600);
-                                maxHeight = Math.min(inputHeight, 600);
-
-                                if ((maxWidth / maxHeight) > (inputWidth / inputHeight)) {
-                                    width = (maxWidth * inputWidth) / inputHeight;
-                                    height = maxHeight;
-                                }
-								else if ((maxWidth / maxHeight) < (inputWidth / inputHeight)) {
-                                    width = maxWidth;
-                                    height = (maxHeight * inputHeight) / inputWidth;
-                                }
-								else {
-                                    width = maxWidth;
-                                    height = maxHeight;
-                                }
 
                                 if (editor.config.srcSet) {
                                     srcSet = editor.config.srcSet(data);
-                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
                                 }
 								else {
-                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + height + '" width="' + width + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
                                 }
 
                                 imgContainerEl.append(CKEDITOR.dom.element.createFromHtml(imgHtml));

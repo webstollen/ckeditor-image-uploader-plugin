@@ -63,10 +63,10 @@ CKEDITOR.plugins.add('simage', {
 
                                 if (editor.config.srcSet) {
                                     srcSet = editor.config.srcSet(data);
-                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor img-responsive" srcset="'+ srcSet +'" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
                                 }
 								else {
-                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
+                                    imgHtml = '<img src="' + imgSrc + '" class="image-editor img-responsive" data-width="' + inputWidth + '" data-height="' + inputHeight + '" height="' + inputHeight + '" width="' + inputWidth + '">';
                                 }
 
                                 imgContainerEl.append(CKEDITOR.dom.element.createFromHtml(imgHtml));
